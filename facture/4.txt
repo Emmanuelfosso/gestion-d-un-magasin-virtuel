@@ -1,0 +1,11 @@
+------------F A C T U R E---------
+id : 5
+temp :2025-1-21_9-18-29
+ 
+ 
+
+nom produit / qte / prix unitaire / prix total
+--cle_usb / 3 / 2500 / 7500
+--pixel_6 / 27 / 155000 / 4.185e+06
+--pain / 3 / 120 / 360
+total : 4192860

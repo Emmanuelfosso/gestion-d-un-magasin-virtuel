@@ -10,6 +10,7 @@ std::string menu[]={"1-afficher inventaire","2-acheter des produits","3-ajouter 
 int index_menu=0,i=0,j=0,choix=10,ajout=1,in=0,s=0,p=0;
 char touche,nom[100];
 produit stock[100];
+produit facturier[100]={};
 int main(){
     int index;
     init_data(stock);
@@ -45,8 +46,56 @@ int main(){
                 choix = 10;
                 break;
             }
-            case 1:{
- 
+            case 1:{//--------interface des factures----------
+                std::cout<<"-------ajouter des produits----------"<<std::endl;
+                while(ajout!=1){
+                std::cout<<"[w] acheter de nouveau produit"<<std::endl;
+                std::cout<<"[s] revenir au menu principal et generer la facture"<<std::endl;
+                system("cls");
+                                                            //verification touche et prise des donnees dans les varriables nom , s , p
+                                                                if(_kbhit()){
+                                                                touche = _getch();
+                                                                if(touche == 'w' || touche == 'W'){
+                                                                    std::cout<<"I N V E N T A I R E"<<std::endl;
+                                                                    std::cout<<"---nom / prix / quatite"<<std::endl;
+                                                                    for(i=0;i<=99;i++){
+                                                                    if(stock[i].qte != 0){
+                                                                    std::cout<<"---"<<stock[i].nom<<" , "<<stock[i].prix<<" , "<<stock[i].qte<<std::endl;
+                                                                    }}
+                                                                    std::cout<<"----------saisir le nom du produit----------"<<std::endl;
+                                                                std::cin>>nom;
+                                                                //verification de lexistance du produit dans la facture
+                                                                while( verif_exist(nom,facturier) == false){
+                                                                    std::cout<<"ce nom existe deja dans la facture,en saisir un autre"<<std::endl;
+                                                                    std::cin>>nom;
+                                                                }
+                                                                std::cout<<"saisir la quantite"<<std::endl;
+                                                                std::cin>>s;
+                                                                while(s > stock[verif_index(nom,stock)].qte){
+                                                                    std::cout<<"pas assez de "<<nom<<"saisir une autre quatite"<<std::endl;
+                                                                }
+                                                                p = stock[verif_index(nom,stock)].prix;
+                                                                for(i=0;i<=99;i++){
+                                                                    if(facturier[i].qte == 0){
+                                                                        facturier[i].nom = nom;
+                                                                        facturier[i].qte = s;
+                                                                        stock[verif_index(nom,stock)].qte -= s;
+                                                                        facturier[i].prix = p;
+                                                                        save_all_data(stock);
+                                                                        break;
+                                                                    }
+                                                                }
+
+                                                                }
+                                                                else if(touche == 's' || touche == 'S'){
+                                                                    facture_save(facturier);
+                                                                    ajout = 1;
+                                                                }}
+                }
+                //on remet les variable des menus a 0;
+                ajout=0;
+                choix = 10;
+                facturier[100]={};
             }
             case 2:{//ajouter un produit//
                 std::cout<<"-------ajouter des produits----------"<<std::endl;

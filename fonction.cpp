@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include<stdlib.h>
+#include<ctime>
 #include"bibli.h"
 //bibliotheque ou sont les fonction
 const std::string FICHIER = "donnees.txt";
@@ -68,3 +69,39 @@ void init_data(produit stock[100]){
         fichier.close();
     }
 }
+//fonction pour les identifiants des facture
+int indentifiant(){
+    int a;
+    std::ifstream fichier("id.txt");
+    if (fichier.is_open()){
+        fichier>>a;
+    }
+    remove("id.txt");
+    std::ofstream mise("id.txt");
+    if(fichier.is_open()){
+        mise<<a+1;
+    }
+    mise.close();
+    return a;
+}
+//fonction pour enregistrer la facture virtuel
+void facture_save(produit facturier[100]){
+    int total=0;
+    time_t now = time(0);
+    tm* ltm = localtime(&now);
+    //creation du fichier avec un nom unique
+    std::string nom_fichier=std::to_string(indentifiant())+".txt";
+    std::ofstream fichier("facture/" + nom_fichier);
+    //initialisation de la facture
+    fichier<<"------------F A C T U R E---------"<<std::endl;
+    fichier<<"id : "<<std::to_string(indentifiant())<<std::endl<<"temp :"<<ltm->tm_year + 1900<<"-"<<ltm->tm_mon + 1<<"-"<<ltm->tm_mday<<"_"<<ltm->tm_hour<<":"<<ltm->tm_min<<":"<<ltm->tm_sec<<"\n \n \n"<<std::endl;
+    fichier<<"nom produit / qte / prix unitaire / prix total"<<std::endl;
+    for(int i=0;i<=99;i++){
+        if(facturier[i].qte != 0){
+            fichier<<"--"<<facturier[i].nom<<" / "<<facturier[i].qte<<" / "<<facturier[i].prix<<" / "<<(facturier[i].qte * facturier[i].prix)<<std::endl;
+            total += facturier[i].qte * facturier[i].prix;
+        }
+    }
+    fichier<<"total : "<<total;
+    fichier.close();
+    }

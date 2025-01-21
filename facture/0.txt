@@ -1,0 +1,9 @@
+id : 1
+temp :2025-1-21_9-6-40
+ 
+ 
+
+nom produit / qte / prix unitaire / prix total
+pixel_6 3 155000 465000
+pain 5 120 600
+total : 465600
