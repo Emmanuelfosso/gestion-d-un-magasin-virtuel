@@ -35,11 +35,12 @@ int verif_index(std::string nom,produit stock[100]){
             return i;
         }
     }
+    return 0;
 }
 //fonction pour verifier si sa existe
 bool verif_exist(std::string nom,produit stock[100]){
     for(int i=0;i<=99;i++){
-        if(nom = stock[i].nom){
+        if(nom == stock[i].nom){
             return false;
         }
     }
@@ -47,6 +48,7 @@ bool verif_exist(std::string nom,produit stock[100]){
 }
 //fonction pour tou sauvegarder
 void save_all_data(produit stock[100]){
+    remove("donnees.txt");
     std::ofstream fichier("donnees.txt");
     if(fichier.is_open()){
         for(int i=0;i<=99;i++)
@@ -62,7 +64,7 @@ void init_data(produit stock[100]){
     if (fichier.is_open()){
         for(int i=0 ; i<= 99;i++){
             fichier>>stock[i].nom>>stock[i].prix>>stock[i].qte;
-        }
+            }
         fichier.close();
     }
 }

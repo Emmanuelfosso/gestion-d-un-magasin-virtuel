@@ -6,20 +6,12 @@
 #include"bibli.h"
 //liste des options de lappli
 std::string menu[]={"1-afficher inventaire","2-acheter des produits","3-ajouter un produit","4-modifier un produit","5-quitter"};
-
 //bibliotheque ou sont les fonction
-int index_menu=0,i=0,j=0,choix=10,ajout=1,in=0,s=0,p=0,index=0;
+int index_menu=0,i=0,j=0,choix=10,ajout=1,in=0,s=0,p=0;
 char touche,nom[100];
-struct produit//structure d'un produit
-{
-    std::string nom;
-    float prix;
-    int qte;
-};
-//liste des produit
 produit stock[100];
-
 int main(){
+    int index;
     init_data(stock);
     while(choix != 4){
         choisir_option(index_menu,menu);
@@ -41,7 +33,16 @@ int main(){
             switch (choix)
             {
             case 0:{
-
+                std::cout<<"---nom / prix / quatite"<<std::endl;
+                for(i=0;i<=99;i++){
+                    if(stock[i].qte != 0){
+                    std::cout<<"---"<<stock[i].nom<<" , "<<stock[i].prix<<" , "<<stock[i].qte<<std::endl;
+                }}
+                std::cout<<"saisir n'importe quel valeur"<<std::endl;
+                std::cin>>p;
+                //on remet les variable des menus a 0;
+                ajout=0;
+                choix = 10;
                 break;
             }
             case 1:{
@@ -73,7 +74,15 @@ int main(){
                                                                 std::cin>>s;
                                                                 std::cout<<"saisir le prix"<<std::endl;
                                                                 std::cin>>p;
-                                                                enregistrerDonnees(nom,s,p);
+                                                                for(i=0;i<=99;i++){
+                                                                    if(stock[i].qte == 0){
+                                                                        stock[i].nom = nom;
+                                                                        stock[i].qte = s;
+                                                                        stock[i].prix = p;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                save_all_data(stock);
                                                                 }
                                                                 }else if(touche == 's' || touche == 'S'){
                                                                 ajout = 1;
@@ -89,6 +98,11 @@ int main(){
             std::cout<<"saisir le nom du produit a modifier"<<std::endl;
             std::cin>>nom;
             index = verif_index(nom,stock);
+            while(!stock[index].qte){
+                std::cout <<"ce produit nexiste pas en saisir un nouveau"<<std::endl;
+                std::cin>>nom;
+            index = verif_index(nom,stock);
+            }
             std::cout<<"que voulez vous modifier?"<<std::endl;
                 while(ajout!=1){
                     std::cout<<"[w] pour modifier le nom "<<std::endl;
@@ -121,8 +135,7 @@ int main(){
                 //on remet les variable des menus a 0;
                 ajout=0;
                 choix = 10;
-                save_all_finish(stock);
-
+                save_all_data(stock);
                 break;
             }
                 
@@ -133,6 +146,7 @@ int main(){
         //fin verif touche
 
 std::cout<<"merci d'avoir utiliser le programme";
+save_all_data(stock);
     
 //
     return 0;
