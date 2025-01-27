@@ -9,15 +9,25 @@ const std::string FICHIER = "donnees.txt";
 //fonction d'affichage du menu
 void choisir_option(int j,std::string menu[]){
     int cmt=0;
-    std::cout<<"------------menu------------"<<std::endl;
+    std::cout<<"\033[34m------------menu------------\033[0m"<<std::endl;
     for(cmt=0;cmt<=4;cmt++){
         if(cmt == j){
-            std::cout<<"|["<<menu[cmt]<<"]|"<<std::endl;
+            std::cout<<"\033[42m|["<<menu[cmt]<<"]|\033[0m"<<std::endl;
         }else{
-            std::cout<<"|"<<menu[cmt]<<"|"<<std::endl;
+            std::cout<<"\033[34m|"<<menu[cmt]<<"|\033[0m"<<std::endl;
         }
     }
+    std::cout<<"\033[34m----------------------------\033[0m"<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
+    std::cout<<"navigation:"<<std::endl;
     std::cout<<"----------------------------"<<std::endl;
+    std::cout<<"------w(haut)---------------\033[0m"<<std::endl;
+    std::cout<<"------^--------|------------\033[0m"<<std::endl;
+    std::cout<<"------|--------v------------\033[0m"<<std::endl;
+    std::cout<<"---------------s(bas)-------\033[0m"<<std::endl;
+    std::cout<<"----------------------------\033[0m"<<std::endl;
+    std::cout<<"-----valide--[e]------------\033[0m"<<std::endl;
+
+
 }
 //focntion pour enregistrer des donnee
 void enregistrerDonnees(std::string donnee,int s,int p) {

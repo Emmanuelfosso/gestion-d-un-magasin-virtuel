@@ -1,0 +1,10 @@
+------------F A C T U R E---------
+id : 7
+temp :2025-1-23_11-23-43
+ 
+ 
+
+nom produit / qte / prix unitaire / prix total
+--preso / 1 / 250 / 250
+--pain / 15 / 120 / 1800
+total : 2050

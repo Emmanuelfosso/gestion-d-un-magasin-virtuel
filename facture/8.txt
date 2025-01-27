@@ -1,0 +1,9 @@
+------------F A C T U R E---------
+id : 9
+temp :2025-1-23_11:29:4
+ 
+ 
+
+nom produit / qte / prix unitaire / prix total
+--cle_usb / 1 / 2500 / 2500
+total : 2500

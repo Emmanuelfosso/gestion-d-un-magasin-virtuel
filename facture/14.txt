@@ -1,0 +1,10 @@
+------------F A C T U R E---------
+id : 15
+temp :2025-1-27_13:37:51
+ 
+ 
+
+nom produit / qte / prix unitaire / prix total
+--souris / 3 / 12 / 36
+--souris_usb / 2 / 1000 / 2000
+total : 2036

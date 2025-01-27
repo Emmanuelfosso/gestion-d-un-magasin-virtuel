@@ -1,0 +1,10 @@
+------------F A C T U R E---------
+id : 17
+temp :2025-1-27_13:48:4
+ 
+ 
+
+nom produit / qte / prix unitaire / prix total
+--souris_wifi / 3 / 1000 / 3000
+--mannette / 19 / 15000 / 285000
+total : 288000

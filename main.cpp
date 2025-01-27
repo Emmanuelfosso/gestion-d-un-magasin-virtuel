@@ -34,10 +34,12 @@ int main(){
             switch (choix)
             {
             case 0:{
-                std::cout<<"---nom / prix / quatite"<<std::endl;
+                system("cls");
+                std::cout<<"\033[33mI N V E N T A I R E\033[0m"<<std::endl;
+                std::cout<<"\033[33m---nom / prix / quatite\033[0m"<<std::endl;
                 for(i=0;i<=99;i++){
                     if(stock[i].qte != 0){
-                    std::cout<<"---"<<stock[i].nom<<" , "<<stock[i].prix<<" , "<<stock[i].qte<<std::endl;
+                    std::cout<<"---"<<stock[i].nom<<" , "<<stock[i].prix<<" , "<<stock[i].qte<<"\033[0m"<<std::endl;
                 }}
                 std::cout<<"saisir n'importe quel valeur"<<std::endl;
                 std::cin>>p;
@@ -47,29 +49,36 @@ int main(){
                 break;
             }
             case 1:{//--------interface des factures----------
-                std::cout<<"-------ajouter des produits----------"<<std::endl;
+                std::cout<<"\033[34m-------acheter des produits----------\033[0m"<<std::endl;
                 while(ajout!=1){
-                std::cout<<"[w] acheter de nouveau produit"<<std::endl;
-                std::cout<<"[s] revenir au menu principal et generer la facture"<<std::endl;
+                std::cout<<"\033[32m[w]\033[33m acheter de nouveau produit\033[0m"<<std::endl;
+                std::cout<<"\033[32m[s]\033[33m revenir au menu principal et generer la facture\033[0m"<<std::endl;
                 system("cls");
                                                             //verification touche et prise des donnees dans les varriables nom , s , p
                                                                 if(_kbhit()){
                                                                 touche = _getch();
                                                                 if(touche == 'w' || touche == 'W'){
-                                                                    std::cout<<"I N V E N T A I R E"<<std::endl;
-                                                                    std::cout<<"---nom / prix / quatite"<<std::endl;
+                                                                    std::cout<<"\033[33mI N V E N T A I R E\033[0m"<<std::endl;
+                                                                    std::cout<<"\033[33m---nom / prix / quatite\033[0m"<<std::endl;
                                                                     for(i=0;i<=99;i++){
                                                                     if(stock[i].qte != 0){
                                                                     std::cout<<"---"<<stock[i].nom<<" , "<<stock[i].prix<<" , "<<stock[i].qte<<std::endl;
                                                                     }}
-                                                                    std::cout<<"----------saisir le nom du produit----------"<<std::endl;
+                                                                    std::cout<<"\033[33m----------saisir le nom du produit----------\033[32m"<<std::endl;
                                                                 std::cin>>nom;
                                                                 //verification de lexistance du produit dans la facture
                                                                 while( verif_exist(nom,facturier) == false){
                                                                     std::cout<<"ce nom existe deja dans la facture,en saisir un autre"<<std::endl;
                                                                     std::cin>>nom;
                                                                 }
-                                                                std::cout<<"saisir la quantite"<<std::endl;
+                                                                
+																//verification de lexistance du produit dans le stock
+                                                                while( verif_exist(nom,stock) == true){
+                                                                    std::cout<<"ce nom n'existe pas dans le stock,en saisir un autre"<<std::endl;
+                                                                    std::cin>>nom;
+                                                                }
+                                                                in = verif_index(nom,stock);
+                                                                std::cout<<"\033[33msaisir la quantite\033[31m"<<std::endl;
                                                                 std::cin>>s;
                                                                 while(s > stock[verif_index(nom,stock)].qte){
                                                                     std::cout<<"pas assez de "<<nom<<"saisir une autre quatite"<<std::endl;
@@ -98,17 +107,17 @@ int main(){
                 facturier[100]={};
             }
             case 2:{//ajouter un produit//
-                std::cout<<"-------ajouter des produits----------"<<std::endl;
+                std::cout<<"\033[34m-------ajouter des produits----------\033[0m"<<std::endl;
                 while(ajout!=1){
-                    std::cout<<"[w] ajouter un produit"<<std::endl;
-                    std::cout<<"[s] revenir au menu principal"<<std::endl;
+                    std::cout<<"\033[32m[w]\033[0m\033[42m ajouter un produit\033[0m"<<std::endl;
+                    std::cout<<"\033[32m[s]\033[0m\033[42m revenir au menu principal\033[0m"<<std::endl;
                     system("cls");
                                                             //verification touche et prise des donnees dans les varriables nom , s , p
                                                                 if(_kbhit()){
                                                                 touche = _getch();
                                                                 if(touche == 'w' || touche == 'W'){
                                                                 if(index_menu>0){
-                                                                std::cout<<"saisir le nom"<<std::endl;
+                                                                std::cout<<"\033[32msaisir le nom\033[31m"<<std::endl;
                                                                 //mise du bon index
                                                                 while(stock[in].nom!=""){
                                                                     in++;
@@ -116,12 +125,12 @@ int main(){
                                                                 std::cin>>nom;
                                                                 //verification de lexistance du produit
                                                                 while( verif_exist(nom,stock) == false){
-                                                                    std::cout<<"ce nom existe deja ,en saisir un autre"<<std::endl;
+                                                                    std::cout<<"\033[32m ce nom existe deja ,en saisir un autre\033[31m"<<std::endl;
                                                                     std::cin>>nom;
                                                                 }
-                                                                std::cout<<"saisir la quantite"<<std::endl;
+                                                                std::cout<<"\033[32msaisir la quantite\033[31m"<<std::endl;
                                                                 std::cin>>s;
-                                                                std::cout<<"saisir le prix"<<std::endl;
+                                                                std::cout<<"\033[32msaisir le prix\033[31m"<<std::endl;
                                                                 std::cin>>p;
                                                                 for(i=0;i<=99;i++){
                                                                     if(stock[i].qte == 0){
@@ -154,10 +163,10 @@ int main(){
             }
             std::cout<<"que voulez vous modifier?"<<std::endl;
                 while(ajout!=1){
-                    std::cout<<"[w] pour modifier le nom "<<std::endl;
-                    std::cout<<"[s] pour modifier le prix"<<std::endl;
-                    std::cout<<"[e] pour modifer la quantite"<<std::endl;
-                    std::cout<<"[d] pour quitter"<<std::endl;
+                    std::cout<<"\033[32m[w]\033[0m\033[42m pour modifier le nom \033[0m"<<std::endl;
+                    std::cout<<"\033[32m[s]\033[0m\033[42m pour modifier le prix\033[0m"<<std::endl;
+                    std::cout<<"\033[32m[e]\033[0m\033[42m pour modifer la quantite\033[0m"<<std::endl;
+                    std::cout<<"\033[32m[d]\033[0m\033[42m pour quitter\033[0m"<<std::endl;
                     system("cls");
                                                             //verification touche et prise des donnees dans les varriables nom , s , p
                                                                 if(_kbhit()){
@@ -194,7 +203,7 @@ int main(){
         }
         //fin verif touche
 
-std::cout<<"merci d'avoir utiliser le programme";
+std::cout<<"\033[41 mmerci d'avoir utiliser le programme";
 save_all_data(stock);
     
 //
